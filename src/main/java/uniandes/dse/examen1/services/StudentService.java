@@ -18,6 +18,15 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public StudentEntity createStudent(StudentEntity newStudent) throws RepeatedStudentException {
-        // TODO
+        log.info("Inicia proceso de creación del estudiante");
+
+        Optional<StudentEntity> existingStudent = studentRepository.findById(studentEntity.getlogin());
+        if (existingStudent.isPresent()) {
+            throw new IllegalOperationException("Ya existe un estudiante con ese login");
+        }
+
+        log.info("Finaliza proceso de creación del estudiante");
+        return studentRepository.save(StudentEntity);
     }
 }
+

@@ -35,9 +35,8 @@ public class CourseEntity {
      */
     private Integer credits;
 
-    /**
-     * A list with the students that have been enrolled in this course.
-     * No student should appear more than once in this list
-     */
-    // TODO
+    @PodamExclude
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentEntity> students = new ArrayList<>();
+    
 }

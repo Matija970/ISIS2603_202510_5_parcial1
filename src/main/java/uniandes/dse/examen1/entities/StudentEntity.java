@@ -20,27 +20,15 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /**
-     * The login of a student. It should be unique.
-     */
     private String login;
-
-    /**
-     * The name of the student
-     */
     private String name;
 
-    /**
-     * A list of the records of courses that the student has taken so far.
-     * Each record indicates the semester, the course, and the final grade of the
-     * student in the course.
-     */
-    // TODO
+    @PodamExclude
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CourseEntity> courses = new ArrayList<>();
 
-    /**
-     * A list of all the courses that the student has ever taken. No course should
-     * appear more than once in this list.
-     */
-    // TODO
+    @PodamExclude
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecordEntity> records = new ArrayList<>();
+
 }

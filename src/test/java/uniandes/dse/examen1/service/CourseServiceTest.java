@@ -32,16 +32,22 @@ public class CourseServiceTest {
 
     @BeforeEach
     void setUp() {
-
+        course = factory.manufacturePojo(CourseEntity.class);
+        entityManager.persist(course);
     }
-
+    
     @Test
     void testCreateRecordMissingCourse() {
-        // TODO
+        
     }
 
     @Test
     void testCreateRepeatedCourse() {
-        // TODO
+        CourseEntity coruseExistente = factory.manufacturePojo(CourseEntity.class);
+        courseExistente.setId(course.getId()); 
+        CourseEntity resultado = courseService.createCourse(nuevoCourse);
+
+        assertNotNull(resultado);
+        assertEquals(courseExistente.getNombre(), resultado.getNombre());
     }
 }
